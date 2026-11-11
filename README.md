@@ -9,12 +9,22 @@ REST API directly over your local network. No cloud, no browser, no certificates
 > **Status: early.** Developed and tested on one iPad mini 1 (iOS 8.4.1). It sets itself up with a
 > starter layout and has an on-screen editor; drawers and finer options are still JSON.
 
+![The dashboard on an iPad mini 1](docs/images/home.jpg)
+
+| | |
+|---|---|
+| ![Music library and player](docs/images/music.jpg) Music library and player | ![Thermostat details](docs/images/climate.jpg) Thermostat details with 24-hour history |
+| ![10-day forecast](docs/images/forecast.jpg) 10-day forecast | ![Layout editor](docs/images/editor.jpg) Layout editor on the iPad |
+
+Camera pictures are blurred in these screenshots.
+
 ## Quick start
 
 1. Jailbreak the iPad and install OpenSSH and AppSync Unified from Cydia.
 2. Build and install the app (`HAPanel/wsl-build.sh`, `HAPanel/deploy.sh`), or install a `.deb`.
 3. Open the app, tap *Connect…*, enter your Home Assistant address and a long-lived access token.
    A starter dashboard appears, built from your own lights, thermostat, speakers and weather.
+   ([what it looks like](docs/images/starter.jpg))
 4. Run `sh ha/install.sh` on the Home Assistant machine so the forecast, the Home drawer and
    saving from the layout editor work.
 
