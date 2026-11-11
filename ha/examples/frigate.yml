@@ -1,0 +1,56 @@
+# Example Frigate config for the person pop-up (alerts.detections in a layout). Frigate only
+# detects here: no recording, no MQTT; snapshots are kept for the history card. The panel reads Frigate's API directly.
+# The cameras come from go2rtc's restream (see go2rtc.yaml), so each camera keeps one connection.
+# Detector: ONNX on an NVIDIA GPU (image tag ...-tensorrt). Export the model as described in
+# Frigate's documentation (Object detectors, ONNX, YOLOv9) and save it as
+# config/model_cache/yolo.onnx. Remove "detectors" and "model" to use Frigate's default detector.
+mqtt:
+  enabled: false
+
+detectors:
+  onnx:
+    type: onnx
+
+model:
+  model_type: yolo-generic
+  width: 320
+  height: 320
+  input_tensor: nchw
+  input_dtype: float
+  path: /config/model_cache/yolo.onnx
+  labelmap_path: /labelmap/coco-80.txt
+
+ffmpeg:
+  hwaccel_args: preset-nvidia
+
+detect:
+  enabled: true
+  width: 1280
+  height: 720
+  fps: 5
+
+objects:
+  track:
+    - person
+    - dog
+    - cat
+
+record:
+  enabled: false
+# snapshots feed the "detections" history card
+snapshots:
+  enabled: true
+  retain:
+    default: 14
+
+cameras:
+  front_yard_cam:
+    ffmpeg:
+      inputs:
+        - path: rtsp://192.168.1.60:8554/front_yard_cam
+          roles: [detect]
+  back_yard_cam:
+    ffmpeg:
+      inputs:
+        - path: rtsp://192.168.1.60:8554/back_yard_cam
+          roles: [detect]

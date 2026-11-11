@@ -1,0 +1,18 @@
+# RevivePad / HAPanel support: 10-day forecast file and saving layouts from the iPad editor.
+# Needs /config/hapanel/fetch_forecast.py and save_layout.py (see the ha/ folder of the repo).
+shell_command:
+  hapanel_forecast: "python3 /config/hapanel/fetch_forecast.py"
+  # arguments are passed without a shell; save_layout.py validates both
+  hapanel_save: "python3 /config/hapanel/save_layout.py {{ panel }} {{ layout_b64 }}"
+
+automation:
+  - id: hapanel_refresh_forecast
+    alias: "HAPanel: refresh 10-day forecast"
+    mode: single
+    trigger:
+      - platform: time_pattern
+        minutes: "/30"
+      - platform: homeassistant
+        event: start
+    action:
+      - action: shell_command.hapanel_forecast

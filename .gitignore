@@ -1,0 +1,9 @@
+# build output
+HAPanel/build/
+HAPanel/.theos/
+*.dSYM/
+# local leftovers
+*.bak*
+*.ips
+.DS_Store
+docs/screenshots/

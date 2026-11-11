@@ -1,0 +1,32 @@
+goodnight:
+  alias: Goodnight
+  description: >-
+    Turns off every light in the house except the outside lights, and sets the
+    air conditioning to 72°F. Used by the iPad panels' Goodnight button; can also
+    be called from automations.
+  icon: mdi:weather-night
+  mode: single
+  variables:
+    # Lights that stay on. Add the backyard light's entity_id here.
+    keep_on:
+      - light.frontdoor
+    lights_to_turn_off: >-
+      {{ states.light
+         | selectattr('state', 'eq', 'on')
+         | map(attribute='entity_id')
+         | reject('in', keep_on)
+         | list }}
+  sequence:
+    - if:
+        - condition: template
+          value_template: "{{ lights_to_turn_off | count > 0 }}"
+      then:
+        - action: light.turn_off
+          target:
+            entity_id: "{{ lights_to_turn_off }}"
+    - action: climate.set_temperature
+      target:
+        entity_id: climate.living_room
+      data:
+        hvac_mode: cool
+        temperature: 72

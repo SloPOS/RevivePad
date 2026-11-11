@@ -1,0 +1,6 @@
+# Timer used by the iPad panels' Timer drawer.
+timer:
+  panel:
+    name: Panel timer
+    icon: mdi:timer-outline
+    restore: true

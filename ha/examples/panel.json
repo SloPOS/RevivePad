@@ -1,0 +1,436 @@
+{
+  "cards": [
+    {
+      "col": 0,
+      "row": 0,
+      "type": "light",
+      "entity": "light.bedroom",
+      "opens": "Lights",
+      "h": 2,
+      "members": false,
+      "w": 1,
+      "title": "Bedroom light"
+    },
+    {
+      "col": 2,
+      "row": 0,
+      "type": "context",
+      "player_names": {
+        "media_player.down_stairs": "Downstairs",
+        "media_player.plex_plexamp_android": "Plexamp",
+        "media_player.bedroom": "Bedroom"
+      },
+      "h": 2,
+      "items": [
+        {
+          "title": "Good night",
+          "when": {
+            "after": "20:00",
+            "before": "03:00"
+          },
+          "buttons": [
+            {
+              "name": "Goodnight",
+              "confirm_text": "Turn off the lights (except outside) and set the AC to 72°?",
+              "entity": "script.goodnight",
+              "confirm": true,
+              "icon": "🌙"
+            }
+          ],
+          "subtitle": "Turns off every light except outside, and sets the AC to 72°"
+        },
+        {
+          "when": {
+            "after": "05:00",
+            "before": "11:00"
+          },
+          "title": "Good morning",
+          "buttons": [
+            {
+              "icon": "💡",
+              "entity": "light.bedroom",
+              "name": "Bedroom light"
+            }
+          ]
+        }
+      ],
+      "plex_session": "media_player.plex_plex_cast_chromecast",
+      "w": 1,
+      "players": [
+        "media_player.bedroom",
+        "media_player.bedroom_speaker",
+        "media_player.down_stairs",
+        "media_player.plex_plexamp_android"
+      ],
+      "plex_server": "YOUR_PLEX_SERVER_ID"
+    },
+    {
+      "col": 0,
+      "row": 2,
+      "type": "climate",
+      "opens": "Climate",
+      "entity": "climate.living_room",
+      "h": 3,
+      "w": 1,
+      "opens_label": "Details",
+      "title": "Thermostat"
+    },
+    {
+      "col": 2,
+      "row": 2,
+      "type": "timer",
+      "presets": [
+        1,
+        3,
+        5,
+        10,
+        15,
+        20,
+        30,
+        60
+      ],
+      "h": 3,
+      "entity": "timer.panel",
+      "w": 1
+    },
+    {
+      "col": 0,
+      "row": 5,
+      "type": "cameras",
+      "h": 1,
+      "interval": 6,
+      "cameras": [
+        {
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=front_yard_cam&width=480",
+          "name": "Front Yard"
+        },
+        {
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=upstairs_front&width=480",
+          "name": "Upstairs Front"
+        },
+        {
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=back_yard_cam&width=480",
+          "name": "Back Yard"
+        },
+        {
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=cars_camera&width=480",
+          "name": "Cars"
+        }
+      ],
+      "w": 3,
+      "title": ""
+    },
+    {
+      "col": 1,
+      "cars": [
+        {
+          "image": "/local/hapanel/cars/model_s.png",
+          "prefix": "tesla_",
+          "name": "Model S"
+        },
+        {
+          "image": "/local/hapanel/cars/model_x.png",
+          "prefix": "tesla_2_",
+          "name": "Model X"
+        }
+      ],
+      "type": "tesla",
+      "row": 0,
+      "h": 3,
+      "w": 1,
+      "title": "Tesla"
+    }
+  ],
+  "presence": {
+    "enabled": true,
+    "sensitivity": "medium",
+    "idle": "photos",
+    "photo_url": "http://192.168.1.60:3000/image",
+    "photo_interval": 45,
+    "blank_after": 1800,
+    "dim_after": 60
+  },
+  "hidden_cards": [
+    {
+      "col": 0,
+      "row": 1,
+      "type": "cameras",
+      "h": 1,
+      "interval": 6,
+      "cameras": [
+        {
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=front_yard_cam&width=480",
+          "name": "Front Yard"
+        },
+        {
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=upstairs_front&width=480",
+          "name": "Upstairs Front"
+        },
+        {
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=back_yard_cam&width=480",
+          "name": "Back Yard"
+        },
+        {
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=cars_camera&width=480",
+          "name": "Cars"
+        }
+      ],
+      "w": 3,
+      "title": ""
+    }
+  ],
+  "title": "Bedroom",
+  "weather": "weather.forecast_home",
+  "alerts": {
+    "timer": "timer.panel",
+    "detections": {
+      "frigate": "http://192.168.1.51:5000",
+      "labels": [
+        "person"
+      ],
+      "seconds": 20,
+      "cooldown": 60,
+      "cameras": {
+        "front_yard_cam": {
+          "name": "Front Yard",
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=front_yard_cam&width=960"
+        },
+        "upstairs_front": {
+          "name": "Upstairs Front",
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=upstairs_front&width=960"
+        },
+        "back_yard_cam": {
+          "name": "Back Yard",
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=back_yard_cam&width=960"
+        },
+        "cars_camera": {
+          "name": "Cars",
+          "url": "http://192.168.1.50:1984/api/frame.jpeg?src=cars_camera&width=960"
+        }
+      }
+    }
+  },
+  "sidebar": [
+    {
+      "name": "Home",
+      "icon": "🏠",
+      "width": 0.94,
+      "tabs": [
+        {
+          "name": "Lights",
+          "icon": "💡",
+          "cards": [
+            {
+              "type": "light_members",
+              "title": "Bedroom lights",
+              "strip_prefix": "Bedroom ",
+              "entity": "light.bedroom"
+            }
+          ],
+          "width": 0.55
+        },
+        {
+          "name": "Climate",
+          "icon": "❄️",
+          "cards": [
+            {
+              "type": "climate_detail",
+              "title": "Downstairs thermostat",
+              "hours": 24,
+              "entity": "climate.living_room"
+            }
+          ],
+          "width": 0.78
+        },
+        {
+          "name": "Music",
+          "icon": "🎵",
+          "cards": [
+            {
+              "type": "media",
+              "title": "Now playing",
+              "players": [
+                {
+                  "entity": "media_player.bedroom",
+                  "name": "Bedroom"
+                },
+                {
+                  "entity": "media_player.down_stairs",
+                  "name": "Downstairs"
+                },
+                {
+                  "entity": "media_player.plex_plexamp_android",
+                  "name": "Plexamp"
+                }
+              ],
+              "plex_session": "media_player.plex_plex_cast_chromecast",
+              "plex_server": "YOUR_PLEX_SERVER_ID"
+            },
+            {
+              "type": "library",
+              "targets": [
+                {
+                  "name": "Bedroom",
+                  "entity": "media_player.bedroom"
+                },
+                {
+                  "name": "All speakers",
+                  "entity": [
+                    "media_player.bedroom",
+                    "media_player.down_stairs"
+                  ]
+                }
+              ],
+              "browse_entity": [
+                "media_player.bedroom",
+                "media_player.bedroom_speaker",
+                "media_player.down_stairs"
+              ],
+              "auto_open": [
+                "Plex",
+                "Music"
+              ]
+            }
+          ],
+          "columns": 1,
+          "row_heights": [
+            0.42,
+            1
+          ]
+        },
+        {
+          "name": "Tesla",
+          "icon": "🚗",
+          "cards": [
+            {
+              "cars": [
+                {
+                  "image": "/local/hapanel/cars/model_s.png",
+                  "prefix": "tesla_",
+                  "name": "Model S"
+                },
+                {
+                  "image": "/local/hapanel/cars/model_x.png",
+                  "prefix": "tesla_2_",
+                  "name": "Model X"
+                }
+              ],
+              "type": "tesla",
+              "title": "Tesla"
+            }
+          ],
+          "width": 0.75
+        },
+        {
+          "name": "Switches",
+          "icon": "🔌",
+          "cards": [
+            {
+              "type": "home"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "icon": "🔧",
+      "width": 0.94,
+      "badge": "updates",
+      "tabs": [
+        {
+          "name": "Ad block",
+          "icon": "🚫",
+          "cards": [
+            {
+              "type": "adblock",
+              "pause_minutes": [
+                10,
+                60
+              ]
+            }
+          ],
+          "rows": 3,
+          "width": 0.45
+        },
+        {
+          "name": "Updates",
+          "icon": "🔄",
+          "cards": [
+            {
+              "type": "updates",
+              "title": "Updates available"
+            }
+          ],
+          "width": 0.72
+        }
+      ]
+    },
+    {
+      "name": "Alerts",
+      "icon": "🚨",
+      "width": 0.94,
+      "cards": [
+        {
+          "type": "detections",
+          "frigate": "http://192.168.1.51:5000",
+          "labels": [
+            "person",
+            "dog",
+            "cat"
+          ],
+          "limit": 60,
+          "cameras": {
+            "front_yard_cam": "Front Yard",
+            "upstairs_front": "Upstairs Front",
+            "back_yard_cam": "Back Yard",
+            "cars_camera": "Cars"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Timer",
+      "width": 0.5,
+      "cards": [
+        {
+          "entity": "timer.panel",
+          "presets": [
+            1,
+            3,
+            5,
+            10,
+            15,
+            20,
+            30,
+            60
+          ],
+          "type": "timer"
+        }
+      ],
+      "icon": "⏰",
+      "hidden": true
+    },
+    {
+      "name": "Forecast",
+      "width": 0.94,
+      "cards": [
+        {
+          "type": "weather_detail",
+          "title": "10-day forecast",
+          "days": 10,
+          "entity": "weather.forecast_home"
+        }
+      ],
+      "hidden": true
+    }
+  ],
+  "row_heights": [
+    1,
+    1,
+    0.55
+  ],
+  "columns": 3,
+  "rows": 6,
+  "home": false
+}

@@ -1,0 +1,19 @@
+# Example go2rtc config for the cameras card: any RTSP camera becomes a JPEG snapshot URL.
+# Run it with:  docker run --env-file cameras.env -v <this folder>:/config alexxit/go2rtc
+# cameras.env holds one line:  CAM_PASSWORD=your-password   (keep it out of this file)
+# Docker reads the env file when the container is CREATED: after changing it, recreate the
+# container (a restart is not enough).
+api:
+  listen: ":1984"
+streams:
+  # Most cameras: go2rtc's own RTSP client.
+  back_yard: rtsp://camuser:${CAM_PASSWORD}@192.168.1.72:554/stream1
+  # Wyze native RTSP/RTSPS (port 554 / 322): read it through ffmpeg. The camera sends nothing
+  # unless audio and video are both requested, which go2rtc's own client does not do.
+  front_yard: ffmpeg:rtsps://camuser:${CAM_PASSWORD}@192.168.1.71:322/stream0#video=copy#audio=copy
+# Wyze cameras allow one viewer and take a few seconds to start, so keep the connection open.
+# Repeated failed logins make them refuse that client address for a while.
+preload:
+  front_yard: "video"
+
+# Card URL:  http://<go2rtc address>:1984/api/frame.jpeg?src=front_yard&width=480

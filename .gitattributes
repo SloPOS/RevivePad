@@ -1,0 +1,3 @@
+# keep LF everywhere: the shell scripts run in WSL and on the iPad
+* text=auto eol=lf
+*.png binary

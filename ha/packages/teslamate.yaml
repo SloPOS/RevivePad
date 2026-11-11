@@ -1,0 +1,31 @@
+# TeslaMate -> Home Assistant over MQTT (car 1). TeslaMate publishes to teslamate/cars/1/<key>
+# once DISABLE_MQTT=false and MQTT_HOST/USERNAME/PASSWORD point at this broker.
+# Distances arrive in km and temperatures in °C; converted to miles / °F here.
+mqtt:
+  sensor:
+    - { name: "Tesla name", unique_id: teslamate_1_display_name, state_topic: "teslamate/cars/1/display_name", icon: mdi:car-electric }
+    - { name: "Tesla state", unique_id: teslamate_1_state, state_topic: "teslamate/cars/1/state", icon: mdi:car-connected }
+    - { name: "Tesla battery", unique_id: teslamate_1_battery_level, state_topic: "teslamate/cars/1/battery_level", unit_of_measurement: "%", device_class: battery, state_class: measurement }
+    - { name: "Tesla usable battery", unique_id: teslamate_1_usable_battery_level, state_topic: "teslamate/cars/1/usable_battery_level", unit_of_measurement: "%", state_class: measurement }
+    - { name: "Tesla range", unique_id: teslamate_1_range, state_topic: "teslamate/cars/1/rated_battery_range_km", unit_of_measurement: "mi", value_template: "{{ (value | float(0) * 0.621371) | round(0) }}", icon: mdi:map-marker-distance }
+    - { name: "Tesla estimated range", unique_id: teslamate_1_est_range, state_topic: "teslamate/cars/1/est_battery_range_km", unit_of_measurement: "mi", value_template: "{{ (value | float(0) * 0.621371) | round(0) }}", icon: mdi:map-marker-distance }
+    - { name: "Tesla charge limit", unique_id: teslamate_1_charge_limit, state_topic: "teslamate/cars/1/charge_limit_soc", unit_of_measurement: "%", icon: mdi:battery-charging-80 }
+    - { name: "Tesla charger power", unique_id: teslamate_1_charger_power, state_topic: "teslamate/cars/1/charger_power", unit_of_measurement: "kW", device_class: power, icon: mdi:ev-station }
+    - { name: "Tesla charge added", unique_id: teslamate_1_charge_added, state_topic: "teslamate/cars/1/charge_energy_added", unit_of_measurement: "kWh", device_class: energy, icon: mdi:battery-plus }
+    - { name: "Tesla time to full", unique_id: teslamate_1_time_to_full, state_topic: "teslamate/cars/1/time_to_full_charge", unit_of_measurement: "h", icon: mdi:timer-sand }
+    - { name: "Tesla inside temperature", unique_id: teslamate_1_inside_temp, state_topic: "teslamate/cars/1/inside_temp", unit_of_measurement: "°F", device_class: temperature, value_template: "{{ (value | float(0) * 9 / 5 + 32) | round(0) }}" }
+    - { name: "Tesla outside temperature", unique_id: teslamate_1_outside_temp, state_topic: "teslamate/cars/1/outside_temp", unit_of_measurement: "°F", device_class: temperature, value_template: "{{ (value | float(0) * 9 / 5 + 32) | round(0) }}" }
+    - { name: "Tesla odometer", unique_id: teslamate_1_odometer, state_topic: "teslamate/cars/1/odometer", unit_of_measurement: "mi", value_template: "{{ (value | float(0) * 0.621371) | round(0) }}", icon: mdi:counter }
+    - { name: "Tesla location", unique_id: teslamate_1_geofence, state_topic: "teslamate/cars/1/geofence", icon: mdi:map-marker }
+    - { name: "Tesla software", unique_id: teslamate_1_version, state_topic: "teslamate/cars/1/version", icon: mdi:update }
+    - { name: "Tesla speed", unique_id: teslamate_1_speed, state_topic: "teslamate/cars/1/speed", unit_of_measurement: "mph", value_template: "{{ (value | float(0) * 0.621371) | round(0) }}", icon: mdi:speedometer }
+  binary_sensor:
+    - { name: "Tesla plugged in", unique_id: teslamate_1_plugged_in, state_topic: "teslamate/cars/1/plugged_in", payload_on: "true", payload_off: "false", device_class: plug }
+    - { name: "Tesla locked", unique_id: teslamate_1_locked, state_topic: "teslamate/cars/1/locked", payload_on: "false", payload_off: "true", device_class: lock }
+    - { name: "Tesla sentry mode", unique_id: teslamate_1_sentry, state_topic: "teslamate/cars/1/sentry_mode", payload_on: "true", payload_off: "false", icon: mdi:cctv }
+    - { name: "Tesla climate on", unique_id: teslamate_1_climate, state_topic: "teslamate/cars/1/is_climate_on", payload_on: "true", payload_off: "false", icon: mdi:fan }
+    - { name: "Tesla doors open", unique_id: teslamate_1_doors, state_topic: "teslamate/cars/1/doors_open", payload_on: "true", payload_off: "false", device_class: door }
+    - { name: "Tesla windows open", unique_id: teslamate_1_windows, state_topic: "teslamate/cars/1/windows_open", payload_on: "true", payload_off: "false", device_class: window }
+    - { name: "Tesla trunk open", unique_id: teslamate_1_trunk, state_topic: "teslamate/cars/1/trunk_open", payload_on: "true", payload_off: "false", device_class: opening }
+    - { name: "Tesla frunk open", unique_id: teslamate_1_frunk, state_topic: "teslamate/cars/1/frunk_open", payload_on: "true", payload_off: "false", device_class: opening }
+    - { name: "Tesla update available", unique_id: teslamate_1_update, state_topic: "teslamate/cars/1/update_available", payload_on: "true", payload_off: "false", device_class: update }

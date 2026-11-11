@@ -1,0 +1,24 @@
+{
+  "name": "Home",
+  "icon": "🏠",
+  "width": 0.94,
+  "columns": 4,
+  "domains": [
+    "light",
+    "switch",
+    "cover",
+    "fan",
+    "lock",
+    "input_boolean"
+  ],
+  "area_order": [
+    "Living Room",
+    "Kitchen",
+    "Bedroom"
+  ],
+  "exclude": [
+    "switch.*_cam_*",
+    "switch.zigbee2mqtt_*",
+    "light.some_bulb_inside_a_group"
+  ]
+}
